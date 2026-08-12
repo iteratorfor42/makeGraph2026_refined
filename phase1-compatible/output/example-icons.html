@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>아이콘과 하이퍼링크 예제</title>
+<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
+  #project-header { padding: 10px 16px; border-bottom: 1px solid #ddd; }
+  #network { width: 100%; height: calc(100vh - 60px); border: none; }
+  #layout-controls { position: fixed; bottom: 16px; right: 16px; z-index: 10; }
+  #layout-controls button {
+    margin-left: 6px; padding: 6px 12px; border: 1px solid #999; background: #fff;
+    border-radius: 4px; cursor: pointer; font-size: 13px;
+  }
+  #layout-controls button.active { background: #333; color: #fff; }
+</style>
+</head>
+<body>
+<div id="project-header"><h1>아이콘과 하이퍼링크 예제</h1></div>
+<div id="network"></div>
+<div id="layout-controls">
+  <button id="btn-normal" class="active" onclick="setLayout('normal')">Normal</button>
+  <button id="btn-horizontal" onclick="setLayout('horizontal')">Horizontal</button>
+  <button id="btn-vertical" onclick="setLayout('vertical')">Vertical</button>
+</div>
+
+<script type="text/javascript">
+  var nodesData = [{"id": "철수", "label": "철수", "color": "blue", "shape": "image", "image": "files/Cheol.png", "title": "<u>철수</u>", "_url": "files/sample1.htm#Cheol-su"}, {"id": "영이", "label": "영이", "color": "blue", "shape": "image", "image": "files/Yeong.png", "title": "<u>영이</u>", "_url": "files/sample1.htm#Yeong-i"}, {"id": "보미", "label": "보미", "color": "red", "shape": "circularImage", "image": "files/Dog.png", "title": "보미"}, {"id": "커피", "label": "커피", "color": "green", "shape": "ellipse", "_hoverIcon": "files/Coffee.png", "title": "<u>커피</u><br><img src=\"files/Coffee.png\" height=\"40\">", "_url": "files/sample1.htm#Coffee"}, {"id": "크림", "label": "아이스크림", "color": "green", "shape": "ellipse", "_hoverIcon": "files/IceCream.png", "title": "<u>아이스크림</u><br><img src=\"files/IceCream.png\" height=\"40\">", "_url": "files/sample1.htm#IceCream"}];
+  var edgesData = [{"from": "철수", "to": "크림", "arrows": "to", "label": "좋아한다", "title": "likes"}, {"from": "영이", "to": "커피", "arrows": "to", "label": "좋아한다", "title": "likes"}, {"from": "영이", "to": "보미", "arrows": "to,from", "label": "친하다", "title": "isCloseTo"}, {"from": "철수", "to": "영이", "arrows": "to", "dashes": true, "label": "사랑한다", "title": "loves"}, {"from": "커피", "to": "크림", "arrows": "to", "color": "#e67e22", "width": 4, "label": "isPreviousTo", "title": "~보다_먼저이다"}];
+
+  var nodes = new vis.DataSet(nodesData);
+  var edges = new vis.DataSet(edgesData);
+
+  var container = document.getElementById('network');
+  var data = { nodes: nodes, edges: edges };
+
+  var baseOptions = {
+    nodes: {
+      font: { size: 14 },
+      borderWidth: 1
+    },
+    edges: {
+      font: { size: 11, align: 'middle' },
+      smooth: { type: 'dynamic' }
+    },
+    physics: {
+      stabilization: true,
+      barnesHut: { gravitationalConstant: -6000, springLength: 140 }
+    },
+    interaction: { hover: true, tooltipDelay: 120 },
+    layout: { improvedLayout: true }
+  };
+
+  var layoutOptions = {
+    normal: { layout: { hierarchical: false }, physics: { enabled: true } },
+    horizontal: {
+      layout: { hierarchical: { enabled: true, direction: 'LR', sortMethod: 'directed' } },
+      physics: { enabled: false }
+    },
+    vertical: {
+      layout: { hierarchical: { enabled: true, direction: 'UD', sortMethod: 'directed' } },
+      physics: { enabled: false }
+    }
+  };
+
+  var network = new vis.Network(container, data, baseOptions);
+
+  function setLayout(kind) {
+    network.setOptions(layoutOptions[kind]);
+    ['normal', 'horizontal', 'vertical'].forEach(function (k) {
+      document.getElementById('btn-' + k).classList.toggle('active', k === kind);
+    });
+  }
+
+  // 하이퍼링크: 노드 클릭 시 지정된 URL로 이동
+  network.on('click', function (params) {
+    if (params.nodes.length === 1) {
+      var node = nodes.get(params.nodes[0]);
+      if (node && node._url) {
+        window.open(node._url, '_blank');
+      }
+    }
+  });
+</script>
+</body>
+</html>
