@@ -1,8 +1,9 @@
 # 원본 vs 재구현 비교 검증
 
-이 컨테이너는 Linux 환경이라 `makeGraph2022.exe`(Windows PE32+ 실행파일)를
-직접 실행할 수 없다. 따라서 아래 절차는 **Windows 환경에서 사용자가 직접
-수행**해야 하는 비교 검증 가이드다.
+검증 과정을 클로드 Linux 환경에서 진행하고자 했으나, 
+아래 절차대로 직접 검증.
+참고> Linux 환경에서는 `makeGraph2022.exe`(Windows PE32+ 실행파일)를 직접 실행할 수 없다. 
+따라서 아래 절차는 **Windows 환경에서 사용자가 직접 수행**해야 한다.
 
 ## 절차
 
@@ -31,11 +32,6 @@
 | 오류 발생 시 화면 | | | | |
 
 5. 차이가 발견되면 `phase2-reproduction/makegraph.py`를 수정하고
-   `phase2-reproduction/tests/`에 회귀 테스트를 추가한다.
+   `phase2-reproduction/tests/`에 회귀/검증 테스트를 추가한다.
    (`phase1-compatible/makegraph.py`는 건드리지 않는다 — 1차 안정 버전 보존.)
 
-## 현재까지 알려진 의도적 차이
-
-`README.md`의 "8. 원본과의 차이" 항목을 참고. 특히 `moving-arrows`의
-애니메이션 재현은 Windows 환경 확보 후 원본 동작을 직접 관찰하며
-결정할 예정이다.

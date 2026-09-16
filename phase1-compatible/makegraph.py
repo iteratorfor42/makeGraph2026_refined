@@ -3,7 +3,7 @@
 """
 makegraph.py
 ------------
-makeGraph2022 호환 재구현 (Phase 1: 실용적 현대화)
+makeGraph2022 호환 재구현 
 
 한국학중앙연구원 디지털인문학연구소의 makeGraph2022.exe가 사용하던
 온톨로지 설계 스크립트(.lst)를 읽어, Vis.js Network 기반의

@@ -2,16 +2,17 @@
 """
 test_makegraph.py
 ------------------
-phase2-reproduction/makegraph.py 에 대한 회귀 테스트.
+phase2-reproduction/makegraph.py 에 대한 회귀/검증 테스트.
 
-원본 makeGraph2022.exe는 Windows 전용 프로그램이라 이 컨테이너에서
-직접 실행/비교할 수 없다. 따라서 여기서는:
+이 내용은 클로드에서 직접 검증 가능하여 다음 두 가지 검증을 클로드에서 진행.
 
   1) 매뉴얼 문서에 기술된 스펙(문법 규칙)을 코드가 정확히 지키는지
   2) 오류 검증 규칙(4대 오류 유형)이 빠짐없이 동작하는지
 
-를 검증한다. Windows 환경이 확보되면 comparison/ 아래에 원본 실행 결과
-(.htm)와 재구현 결과(.html)를 나란히 두고 수동/스크립트 비교를 추가한다.
+Windows 환경이 확보되면 comparison/ 아래에 원본 실행 결과
+(.htm)와 재구현 결과(.html)를 나란히 두고 수동/스크립트 비교를 추가할 수 있다.
+그러나 이런 작업이 번거로운 것도 있고 GUI가 더 편해서 GUI로 새 버전을 만들었고,
+이 버전은 폐기하게 되었다.
 
 실행:
     cd phase2-reproduction

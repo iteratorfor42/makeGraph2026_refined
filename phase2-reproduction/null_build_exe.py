@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+CLI 도구라 사용하기 복잡해서 그냥 이 내용 폐기하고 GUI로 만듦
+
 build_exe.py
 ------------
 makegraph.py를 Windows 실행파일(makegraph.exe)로 패키징한다.
 
-반드시 Windows 환경에서 실행해야 한다 (PyInstaller는 크로스 컴파일을
-지원하지 않으므로, Linux/Mac에서 실행하면 그 OS용 실행파일이 만들어진다).
+반드시 Windows 환경에서 실행해야 한다.
+ (PyInstaller는 크로스 컴파일을
+지원하지 않으므로, Linux/Mac에서 실행하면 그 OS용 실행파일이 만들어진다.)
 
 사용법:
     python build_exe.py
