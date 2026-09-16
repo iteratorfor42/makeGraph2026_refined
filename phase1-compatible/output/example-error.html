@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>MakeGraph - 오류</title>
+<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
+  #error-list { padding: 16px; color: #b00020; }
+  #error-list li { margin-bottom: 6px; }
+  #network { width: 100%; height: 60vh; border-top: 1px solid #ddd; }
+</style>
+</head>
+<body>
+<h2 style="padding: 16px 16px 0;">네트워크 그래프 생성 오류</h2>
+<div id="error-list">
+  <ul>
+    <li>[12행] Node &#x27;영이&#x27;에 정의되지 않은 Class &#x27;동물&#x27;가 사용되었습니다.</li>
+    <li>[16행] Link에서 정의되지 않은 Node &#x27;민수&#x27;이 사용되었습니다.</li>
+    <li>[16행] Link에서 정의되지 않은 Relation &#x27;loves&#x27;이 사용되었습니다.</li>
+  </ul>
+</div>
+<div id="network"></div>
+<script type="text/javascript">
+  var nodes = new vis.DataSet([{"id": 0, "label": "오류 1\n[12행] Node '영이'에 정의되지 않은 Class '동물'가 사용되었습니다."}, {"id": 1, "label": "오류 2\n[16행] Link에서 정의되지 않은 Node '민수'이 사용되었습니다."}, {"id": 2, "label": "오류 3\n[16행] Link에서 정의되지 않은 Relation 'loves'이 사용되었습니다."}]);
+  var edges = new vis.DataSet([]);
+  var container = document.getElementById('network');
+  var network = new vis.Network(container, { nodes: nodes, edges: edges }, {
+    nodes: { shape: 'box', color: { background: '#ffe0e0', border: '#b00020' }, font: { size: 13 } },
+    physics: { enabled: true }
+  });
+</script>
+</body>
+</html>
